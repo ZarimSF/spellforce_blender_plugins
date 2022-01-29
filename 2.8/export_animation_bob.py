@@ -45,6 +45,8 @@ class AnimationBoneData:
 		self.positions_max_time = max(self.positions_max_time, t)
 		
 def SaveBOB(context, filepath):
+	prev_mode = bpy.context.object.mode
+
 	object = context.object
 	armature = object.data
 	
@@ -173,6 +175,7 @@ def SaveBOB(context, filepath):
 	
 	bobfile.close()
 	
+	bpy.ops.object.mode_set(mode = prev_mode)
 	return 0
 
 

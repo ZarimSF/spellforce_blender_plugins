@@ -78,6 +78,8 @@ def CompareVerts(v1, v2):	  # [vert_id, vert_normal, vert_uv]
 	
 
 def SaveMSBStatic(context, filepath):
+	prev_mode = bpy.context.object.mode
+
 	object = bpy.context.object
 	obname=object.name
 	mesh = object.data
@@ -213,9 +215,15 @@ def SaveMSBStatic(context, filepath):
 		
 		# handle materials
 		material = SFMaterial()
-		diffuse_color = mesh.materials[i].node_tree.nodes.get('Diffuse Color').outputs[0].default_value
+		diffuse_node = mesh.materials[i].node_tree.nodes.get('Diffuse Color')
+		diffuse_color = [0.5, 0.5, 0.5]
+		if diffuse_node is not None:
+			diffuse_color = diffuse_node.outputs[0].default_value
 		material.diffCol = [int(diffuse_color[2]*255), int(diffuse_color[1]*255), int(diffuse_color[0]*255), 0]
-		specular_color = mesh.materials[i].node_tree.nodes.get('Specular Color').outputs[0].default_value
+		specular_node = mesh.materials[i].node_tree.nodes.get('Specular Color')
+		specular_color = [0, 0, 0]
+		if specular_node is not None:
+			specular_color = specular_node.outputs[0].default_value
 		material.specCol = [int(specular_color[2]*255), int(specular_color[1]*255), int(specular_color[0]*255), 0]
 		material.emitCol = [0, 0, 0, 0]
 		if mesh.materials[i].get('SFRenderMode') is not None:
@@ -240,6 +248,8 @@ def SaveMSBStatic(context, filepath):
 	
 	msbfile.write(pack("6f", bbox_total[0],bbox_total[1],bbox_total[2],bbox_total[3],bbox_total[4],bbox_total[5]))
 	msbfile.close()
+	
+	bpy.ops.object.mode_set(mode = prev_mode)
 	return 0
 
 

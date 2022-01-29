@@ -445,16 +445,24 @@ def LoadMSBSkinned(context, filepath):
 		
 		# create nodes
 		uvmap_node = nodes.new(type = 'ShaderNodeUVMap')
+		uvmap_node.location = (-300, 100)
 		imtex_node = nodes.new(type = 'ShaderNodeTexImage')
 		imtex_node.name = 'Image Texture'
+		imtex_node.location = (-100, 200)
 		tbsdf_node = nodes.new(type = 'ShaderNodeBsdfTransparent')
+		tbsdf_node.location = (200, 100)
 		dbsdf_node = nodes.new(type = 'ShaderNodeBsdfDiffuse')
+		dbsdf_node.location = (200, 0)
 		mixsh_node = nodes.new(type = 'ShaderNodeMixShader')
+		mixsh_node.location = (400, 100)
 		output_node = nodes.new(type = 'ShaderNodeOutputMaterial')
+		output_node.location = (600, 100)
 		diffuse_node = nodes.new(type = 'ShaderNodeRGB')
 		diffuse_node.name = 'Diffuse Color'
+		diffuse_node.location = (-500, 300)
 		specular_node = nodes.new(type = 'ShaderNodeRGB')
 		specular_node.name = 'Specular Color'
+		specular_node.location = (-500, 100)
 		# set node parameters
 		mat = model.meshbuffers[i].material
 		uvmap_node.uv_map = objName
