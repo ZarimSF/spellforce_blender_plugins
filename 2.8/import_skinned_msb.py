@@ -334,6 +334,8 @@ def LoadMSBSkinned(context, filepath):
 		texname = model.meshbuffers[t].material.texMain.texName
 		if not(texname in img_dict):
 			imagepath=os.path.split(filepath)[0] + "\\" + texname + ".dds"
+			if not os.path.exists(imagepath):
+				imagepath=os.path.split(filepath)[0] + "\\" + texname + ".tga"
 			image = bpy.data.images.load(imagepath)
 			if image is not None:
 				image.name = texname
