@@ -119,7 +119,7 @@ def bobimport(infile, bDebugLogMSB):
 	
 
 def getInputFilenameBOB(self, filename, bDebugLogMSB):
-	checktype = filename.split('\\')[-1].split('.')[1]
+	checktype = filename.split(os.path.sep)[-1].split('.')[1]
 	print ("------------",filename)
 	if checktype.lower() != 'bob':
 		print ("  Selected file = ", filename)

@@ -180,7 +180,7 @@ def msbimport(infile, bDebugLogMSB):
 			texnames.append(texname)
 			tex = bpy.data.textures.new(name = texname, type = 'IMAGE')
 			image = None
-			imagepath=os.path.split(infile)[0] + "\\" + texname + ".dds"
+			imagepath=os.path.split(infile)[0] + os.path.sep + texname + ".dds"
 			image = bpy.data.images.load(imagepath)
 			if image is not None:
 				tex.image = image
@@ -280,7 +280,7 @@ def msbimport(infile, bDebugLogMSB):
 	
 
 def getInputFilenameMSB(self, filename, bDebugLogMSB):
-	checktype = filename.split('\\')[-1].split('.')[1]
+	checktype = filename.split(os.path.sep)[-1].split('.')[1]
 	print ("------------",filename)
 	if checktype.lower() != 'msb':
 		print ("  Selected file = ", filename)

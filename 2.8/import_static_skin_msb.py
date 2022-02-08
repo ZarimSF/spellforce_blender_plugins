@@ -136,7 +136,7 @@ def LoadMSBStaticSkin(context, filepath):
 		image = None
 		texname = model.meshbuffers[t].material.texMain.texName
 		if not(texname in img_dict):
-			imagepath=os.path.split(filepath)[0] + "\\" + texname + ".dds"
+			imagepath=os.path.split(filepath)[0] + os.path.sep + texname + ".dds"
 			image = bpy.data.images.load(imagepath)
 			if image is not None:
 				image.name = texname
